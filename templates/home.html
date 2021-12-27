@@ -2,9 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Home</title>
 </head>
 <body>
-
+<center>
+    <h1>You have successfully logged in</h1>
+    <form method="POST">
+        {%csrf_token%}
+        <button type="submit" name="logout">Logout</button>
+    </form>
+</center>
 </body>
 </html>

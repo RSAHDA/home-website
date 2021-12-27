@@ -1,24 +1,39 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate
+from django.contrib.auth import logout
 import managment
+
+file = 'login.html'
 
 
 def index(request):
-    if request.method == "POST":
-        username = request.POST["username"]
-        password = request.POST["password"]
+    global file
+    internal_file = file
 
-        user = authenticate(username=username, password=password)
+    if internal_file == 'login.html':
+        if request.method == "POST":
+            username = request.POST["username"]
+            password = request.POST["password"]
 
-        if user is not None:
-            return render(request, "home.html")
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                file = 'home.html'
+                return render(request, "home.html")
+            else:
+                if managment.validateIP(managment.getIP()):
+                    return render(request, "login.html")
+                else:
+                    return render(request, "404.html")
         else:
             if managment.validateIP(managment.getIP()):
                 return render(request, "login.html")
             else:
                 return render(request, "404.html")
-    else:
-        if managment.validateIP(managment.getIP()):
+    elif internal_file == 'home.html':
+        if request.method == 'POST':
+            logout(request)
+            file = "login.html"
             return render(request, "login.html")
         else:
-            return render(request, "404.html")
+            return render(request, "home.html")
