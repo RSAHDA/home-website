@@ -1,16 +1,21 @@
+# import django.contrib.auth
 from django.shortcuts import render
 from django.contrib.auth import authenticate
 import managment
 
 
+attempts = 5
+
+
 def index(request):
+    global attempts
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
 
-        user = authenticate(username=username, password=password)
+        credentials = authenticate(username=username, password=password)
 
-        if user is not None:
+        if credentials is not None:
             return render(request, "home.html")
         else:
             if managment.validateIP(managment.getIP()):
