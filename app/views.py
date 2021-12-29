@@ -3,8 +3,9 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate
 import managment
 
-
 attempts = 5
+
+blocked_ipx = []
 
 
 def index(request):
@@ -19,11 +20,13 @@ def index(request):
             return render(request, "home.html")
         else:
             if managment.validateIP(managment.getIP()):
+                blocked_ipx.extend(str(managment.ips))
                 return render(request, "login.html")
             else:
                 return render(request, "404.html")
     else:
         if managment.validateIP(managment.getIP()):
+
             return render(request, "login.html")
         else:
             return render(request, "404.html")

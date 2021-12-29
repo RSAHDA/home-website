@@ -4,6 +4,7 @@ import socket
 
 
 blocked_ipx = []
+
 hostname = socket.gethostname()
 ips = [socket.gethostbyname(hostname)]
 
@@ -18,3 +19,4 @@ def validateIP(ipx):
             return True
         else:
             return False
+
