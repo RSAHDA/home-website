@@ -7,4 +7,9 @@ class ipAdmin(admin.ModelAdmin):
     list_filter = ['location']
 
 
+class blocked_ipAdmin(admin.ModelAdmin):
+    list_display = ['sus_ips']
+
+
 admin.site.register(ip, ipAdmin)
+admin.site.register(blocked_ip, blocked_ipAdmin)

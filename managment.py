@@ -1,9 +1,10 @@
 import socket
+from app.models import *
 
 # this is like this for now so that it can actually validate for now.
 
 hostname = socket.gethostname()
-ips = [socket.gethostbyname(hostname)]
+ips = ip.objects.all()
 
 
 def getIP():
@@ -12,7 +13,7 @@ def getIP():
 
 def validateIP(ipx):
     for ip in ips:
-        if ip == ipx:
+        if ip.ip == ipx:
             return True
         else:
             return False
