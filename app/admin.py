@@ -1,3 +1,10 @@
 from django.contrib import admin
+from .models import *
 
-# Register your models here.
+
+class ipAdmin(admin.ModelAdmin):
+    list_display = ['location']
+    list_filter = ['location']
+
+
+admin.site.register(ip, ipAdmin)
