@@ -22,5 +22,6 @@ def validateIP(ipx):
         else:
             return False
 
+
 def send_mail(send_to, request, html_message, message):
     pass
