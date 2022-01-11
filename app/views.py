@@ -22,15 +22,13 @@ def index(request):
         elif attempts == 3:
             ip = blocked_ip(sus_ips=managment.getIP())
             ip.save()
-            return render(request, "404.html")
+            return render(request, "meanie.html")
         else:
-            if managment.validateIP(managment.getIP()):
-                attempts += 1
-                return render(request, "login.html")
-            else:
-                return render(request, "404.html")
-    else:
-        if managment.validateIP(managment.getIP()):
+            attempts += 1
             return render(request, "login.html")
-        else:
+
+    else:
+        if not managment.validateIP(managment.getIP()):
             return render(request, "404.html")
+        else:
+            return render(request, "login.html")
