@@ -22,6 +22,8 @@ def validateIP(ipx):
         else:
             return False
 
+# work on this chuck ragav, make it so that it adds messages to SentMail object.
+
 
 def send_mail(send_to, request, html_message, message):
     pass
