@@ -19,10 +19,10 @@ def index(request):
 
         if credentials is not None:
             return render(request, "home.html")
-        elif attempts == 3:
+        elif attempts > 3:
             ip = blocked_ip(sus_ips=managment.getIP())
             ip.save()
-            return render(request, "meanie.html")
+            return render(request, "404.html")
         else:
             attempts += 1
             return render(request, "login.html")
