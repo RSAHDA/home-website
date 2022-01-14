@@ -29,6 +29,6 @@ def index(request):
 
     else:
         if not managment.validateIP(managment.getIP()):
-            return render(request, "404.html")
-        else:
             return render(request, "login.html")
+        else:
+            return render(request, "404.html")
