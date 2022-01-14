@@ -1,12 +1,10 @@
 # import django.contrib.auth
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
 from .models import *
 import managment
 
 attempts = 0
-
-blocked_ipx = []
 
 
 def index(request):
@@ -18,7 +16,7 @@ def index(request):
         credentials = authenticate(username=username, password=password)
 
         if credentials is not None:
-            return render(request, "home.html")
+            return redirect("/home/")
         elif attempts > 3:
             ip = blocked_ip(sus_ips=managment.getIP())
             ip.save()
