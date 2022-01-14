@@ -1,9 +1,7 @@
 import socket
 
-import app.models
 from app.models import *
-
-# this is like this for now so that it can actually validate for now.
+from django.contrib.auth.models import User
 
 hostname = socket.gethostname()
 ips = ip.objects.all()
@@ -24,3 +22,8 @@ def validateIP(ipx):
         else:
             return False
 
+# work on this chuck ragav, make it so that it adds messages to SentMail object.
+
+
+def send_mail(send_to, request, html_message, message):
+    pass
