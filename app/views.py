@@ -18,6 +18,8 @@ def index(request):
         if credentials is not None:
             return render(request, "home.html")
         elif attempts >= 3:
+            return redirect("/home/")
+        elif attempts > 3:
             ip = blocked_ip(sus_ips=managment.getIP())
             ip.save()
             return render(request, "404.html")
