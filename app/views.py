@@ -32,3 +32,10 @@ def index(request):
             return render(request, "login.html")
         else:
             return render(request, "404.html")
+
+
+def sign_out(request):
+    logout(request)
+    return redirect('/')
+
+
