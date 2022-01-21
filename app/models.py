@@ -15,3 +15,7 @@ class SentMail(models.Model):
     from_whom = models.CharField(max_length=256)
     message = models.TextField(max_length=999999999)
     html = models.TextField()
+
+
+class Announcement(models.Model):
+    anouncement = models.TextField()
