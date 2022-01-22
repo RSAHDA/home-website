@@ -17,9 +17,12 @@ def index(request):
 
         if credentials is not None:
             an = Announcement.objects.all()
+            attempts = 0
             return render(request, "home.html", {
                 'a': an,
             })
+        elif managment.validateIP(managment.getIP()):
+            return render(request, "404.html")
         elif attempts > 3:
             ip = blocked_ip(sus_ips=managment.getIP())
             ip.save()

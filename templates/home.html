@@ -9,7 +9,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Ninth navbar example">
         <div class="container-xl">
-          <a class="navbar-brand" href="#">Rsahda</a>
+          <a class="navbar-brand" href="#">RSAHDA</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07XL" aria-controls="navbarsExample07XL" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -22,6 +22,11 @@
               <li class="nav-item active">
                 <a class="nav-link" href="#">Projects</a>
               </li>
+              {% if request.user.is_superuser %}
+              <li class="nav-item active">
+                <a class="nav-link" href="http://127.0.0.1:8000/admin/">Django Administrator</a>
+              </li>
+              {% endif %}
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown07XL" data-bs-toggle="dropdown" aria-expanded="false">Messages</a>
                 <ul class="dropdown-menu" aria-labelledby="dropdown07XL">
@@ -36,8 +41,13 @@
         </div>
       </nav>
 <center>
-    <h1> Announcement: </h1>
-    <h5> {{ a }} </h5>
+    <!-- MAKE THIS BETTER IF YOU CAN -->
+    <h1> Announcements: </h1>
+    <div style="color: white; background-color: red;">
+        {% for i in a%}
+        <h5> {{ i.anouncement }} </h5>
+        {% endfor %}
+    </div><br>
 </center>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
         crossorigin="anonymous"></script>

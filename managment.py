@@ -1,10 +1,8 @@
 import socket
 
 from app.models import *
-from django.contrib.auth.models import User
 
 hostname = socket.gethostname()
-ips = ip.objects.all()
 
 
 def getIP():
@@ -15,12 +13,7 @@ def validateIP(ipx):
     for i in blocked_ip.objects.all():
         if i.sus_ips == getIP():
             return False
-
-    for ip in ips:
-        if ip.ip == ipx:
-            return True
-        else:
-            return False
+    return True
 
 # work on this chuck ragav, make it so that it adds messages to SentMail object.
 
