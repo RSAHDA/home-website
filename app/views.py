@@ -1,6 +1,6 @@
 # import django.contrib.auth
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, logout
 from .models import *
 import managment
 
@@ -16,7 +16,10 @@ def index(request):
         credentials = authenticate(username=username, password=password)
 
         if credentials is not None:
-            return redirect("/home/")
+            an = Announcement.objects.all()
+            return render(request, "home.html", {
+                'a': an,
+            })
         elif attempts > 3:
             ip = blocked_ip(sus_ips=managment.getIP())
             ip.save()
@@ -26,7 +29,16 @@ def index(request):
             return render(request, "login.html")
 
     else:
-        if managment.validateIP(managment.getIP()):
+        if not managment.validateIP(managment.getIP()):
+            return render(request, "404.html")
+        elif managment.validateIP(managment.getIP()):
             return render(request, "login.html")
         else:
             return render(request, "404.html")
+
+
+def sign_out(request):
+    logout(request)
+    return redirect('/')
+
+
