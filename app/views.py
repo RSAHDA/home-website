@@ -1,6 +1,5 @@
-# import django.contrib.auth
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, logout
+from django.contrib.auth import authenticate, logout, login
 from .models import *
 import managment
 
@@ -10,17 +9,16 @@ attempts = 0
 def index(request):
     global attempts
     if request.method == "POST":
+
         username = request.POST["username"]
         password = request.POST["password"]
 
         credentials = authenticate(username=username, password=password)
 
         if credentials is not None:
-            an = Announcement.objects.all()
+            login(request, credentials)
             attempts = 0
-            return render(request, "home.html", {
-                'a': an,
-            })
+            return redirect('/home')
         elif managment.validateIP(managment.getIP()):
             return render(request, "404.html")
         elif attempts > 3:
@@ -32,9 +30,9 @@ def index(request):
             return render(request, "login.html")
 
     else:
-        if not managment.validateIP(managment.getIP()):
-            return render(request, "404.html")
-        elif managment.validateIP(managment.getIP()):
+        if request.user.is_authenticated:
+            return redirect('/home')
+        if managment.validateIP(managment.getIP()):
             return render(request, "login.html")
         else:
             return render(request, "404.html")
@@ -45,3 +43,11 @@ def sign_out(request):
     return redirect('/')
 
 
+def home(request):
+    if request.user.is_authenticated:
+        an = Announcement.objects.all()
+        return render(request, "home.html", {
+            'a': an,
+        })
+    else:
+        return render(request, "404.html")
