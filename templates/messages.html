@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Messages</title>
+</head>
+<body>
+    <!-- Make it better, Ragav -->
+    <h1>Inbox Of {{ request.user.first_name }} {{ request.user.last_name }}:</h1>
+
+    <ul>
+        {% for message in messages %}
+        <li><a href="/inbox/{{ message.subject }}" target="_blank">{{ message.subject }}:   {{ message.from_whom }}</a></li>
+        {% empty %}
+        <h5> Wohoo! Your inbox is empty!</h5>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
