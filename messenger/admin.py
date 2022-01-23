@@ -1,3 +1,8 @@
 from django.contrib import admin
+from . models import *
 
-# Register your models here.
+
+class MessagesAdmin(admin.ModelAdmin):
+    list_display = ['message']
+
+admin.site.register(SentMail,MessagesAdmin)
