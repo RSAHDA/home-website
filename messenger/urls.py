@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.messages, name="inbox_display"),
-    path('<slug:message>', views.display_message, name="message_display"),
+    path('create/', views.create_message, name="create_message_display"),
 ]

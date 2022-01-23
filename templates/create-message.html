@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Create New Message</title>
+    </head>
+    <body>
+        <h1>Create New Message</h1>
+        <form method="post" id="form">
+            {% csrf_token %}
+            <label>Send To:  </label>
+            <input type="text" placeholder="Send To" name="send_to"><br>
+
+            <label>Subject:  </label>
+            <input type="text" placeholder="Subject" name="subject"><br>
+
+            <div id="html" style="display: none">
+                <textarea name="html" placeholder="Enter Code For HTML">
+                    <h1>Sent by, {{ request.user.username }}</h1>
+                </textarea>
+            </div>
+
+            <div id="text" style="display: none">
+                <textarea name="text" placeholder="Enter Message">
+                    Sent By {{ request.user.username }}
+                </textarea>
+            </div>
+
+            <button type="submit">SEND MESSAGE</button>
+        </form>
+
+        <h5>MESSAGE TYPE:</h5>
+        <button onclick="html_editor()">HTML</button><button onclick="text_editor()">TEXT</button><br>
+
+        <script>
+            function html_editor() {
+                document.getElementById("html").style.display = "block"
+                document.getElementById("text").style.display = "none"
+            }
+
+            function text_editor() {
+                document.getElementById("html").style.display = "none"
+                document.getElementById("text").style.display = "block"
+            }
+        </script>
+
+    </body>
+</html>
