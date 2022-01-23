@@ -1,8 +1,9 @@
 from django.contrib import admin
-from . models import *
+from .models import *
 
 
 class MessagesAdmin(admin.ModelAdmin):
     list_display = ['message']
 
-admin.site.register(SentMail,MessagesAdmin)
+
+admin.site.register(SentMail, MessagesAdmin)
