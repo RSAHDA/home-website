@@ -16,13 +16,13 @@
 
             <div id="html" style="display: none">
                 <textarea name="html" placeholder="Enter Code For HTML">
-                    <h1>Sent by, {{ request.user.username }}</h1>
+<h1>Sent by, {{ request.user.username }}</h1>
                 </textarea>
             </div>
 
             <div id="text" style="display: none">
                 <textarea name="text" placeholder="Enter Message">
-                    Sent By {{ request.user.username }}
+Sent By {{ request.user.username }}
                 </textarea>
             </div>
 
@@ -34,13 +34,13 @@
 
         <script>
             function html_editor() {
-                document.getElementById("html").style.display = "block"
-                document.getElementById("text").style.display = "none"
+                document.getElementById("html").style.display = "block";
+                document.getElementById("text").style.display = "none";
             }
 
             function text_editor() {
-                document.getElementById("html").style.display = "none"
-                document.getElementById("text").style.display = "block"
+                document.getElementById("html").style.display = "none";
+                document.getElementById("text").style.display = "block";
             }
         </script>
 

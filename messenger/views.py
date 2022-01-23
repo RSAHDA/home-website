@@ -14,7 +14,7 @@ def messages(request):
 
 def create_message(request):
     if request.user.is_authenticated:
-        if request.method == "post":
+        if request.method == "POST":
             send_to = request.POST["send_to"]
             html = request.POST["html"]
             text = request.POST["text"]
