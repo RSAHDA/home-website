@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('messenger', '0001_initial'),
     ]
@@ -21,3 +20,5 @@ class Migration(migrations.Migration):
             field=models.TextField(blank=True, max_length=999999999),
         ),
     ]
+
+# Lawyer won't see this file
