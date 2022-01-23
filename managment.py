@@ -1,6 +1,6 @@
 import socket
-
 from app.models import *
+from messenger.models import *
 
 hostname = socket.gethostname()
 
@@ -15,8 +15,16 @@ def validateIP(ipx):
             return False
     return True
 
-# work on this chuck ragav, make it so that it adds messages to SentMail object.
+
+def send_mail(send_to, request, html_message, message, subject):
+    send_from = request.user.username
+    new_message = SentMail(send_to=send_to, from_whom=send_from, message=message, html=html_message, subject=subject)
+    new_message.save()
 
 
-def send_mail(send_to, request, html_message, message):
-    pass
+def load_mails(request):
+    username = request.user.username
+    mails = SentMail.objects.filter(
+        send_to=username
+    )
+    return mails

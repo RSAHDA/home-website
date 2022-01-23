@@ -2,8 +2,9 @@ from django.contrib import admin
 from .models import *
 
 
-class MessagesAdmin(admin.ModelAdmin):
-    list_display = ['message']
+class SentMailAdmin(admin.ModelAdmin):
+    list_display = ['subject', 'send_to', 'from_whom']
+    list_filter = ['send_to', 'from_whom']
 
 
-admin.site.register(SentMail, MessagesAdmin)
+admin.site.register(SentMail, SentMailAdmin)
