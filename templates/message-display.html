@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ message.subject }}</title>
+</head>
+<body>
+    <h1>Sent By: {{ message.from_whom }}</h1>
+    <h3>{{ message.subject }}</h3>
+
+    {% if message.message == "" %}
+    <hr>
+    <p>{{ message.html | safe }}</p>
+    {% else %}
+    <p>{{ message.message }}</p>
+    {% endif %}
+
+</body>
+</html>
