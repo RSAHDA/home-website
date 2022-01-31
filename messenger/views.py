@@ -45,3 +45,15 @@ def view_message(request, id):
         })
     else:
         return render(request, "404.html")
+
+
+def trash(request):
+    if request.user.is_authenticated:
+        messages = SentMail.objects.filter(
+            is_in_trash=True
+        )
+        return render(request, "trash.html", {
+            "messages": messages
+        })
+    else:
+        return render(request, "404.html")

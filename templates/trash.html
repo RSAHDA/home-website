@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trash</title>
+</head>
+<body>
+    <h1>{{ request.user.first_name }} {{ request.user.last_name }}'s Trash:</h1>
+    <hr>
+    <ul>
+        {% for message in messages %}
+        <li><a>{{ message.subject }}: {{ message.from_whom }}</a> ------ <a>DELETE</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
