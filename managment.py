@@ -11,7 +11,7 @@ def getIP():
 
 def validateIP(ipx):
     for i in blocked_ip.objects.all():
-        if i.sus_ips == getIP():
+        if i.sus_ips == ipx:
             return False
     return True
 
