@@ -10,7 +10,7 @@
 
     <ul>
         {% for message in messages %}
-        <li><a href="" target="_blank">{{ message.subject }}:   {{ message.from_whom }}</a></li>
+        <li><a href="/inbox/{{ message.message_id }}" target="_blank">{{ message.subject }}:   {{ message.from_whom }}</a></li>
         {% empty %}
         <h5> Wohoo! Your inbox is empty!</h5>
         {% endfor %}

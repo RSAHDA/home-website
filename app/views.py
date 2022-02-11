@@ -17,8 +17,7 @@ def index(request):
 
         if credentials is not None:
             login(request, credentials)
-            return render(request, "home.html")
-
+            attempts = 0
             return redirect('/home')
 
         elif managment.validateIP(managment.getIP()):
@@ -47,9 +46,15 @@ def sign_out(request):
 
 def home(request):
     if request.user.is_authenticated:
+
+        user_details = UserJob.objects.get(
+            username=request.user.username
+        )
+
         an = Announcement.objects.all()
         return render(request, "home.html", {
             'a': an,
+            "user_details": user_details,
         })
     else:
         return render(request, "404.html")

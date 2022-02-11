@@ -29,11 +29,11 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdown07XL">
                   <li><a class="dropdown-item" href="/inbox"> Inbox </a></li>
                   <li><a class="dropdown-item" href="/inbox/create"> Compose </a></li>
-                  <li><a class="dropdown-item" href="#"> Trash </a></li>
+                  <li><a class="dropdown-item" href="/inbox/trash"> Trash </a></li>
                 </ul>
               </li>
             </ul>
-                <button type="submit" name="logout" class = "navbar-btn"><a href="http://127.0.0.1:8000/logout">Logout</a></button>
+                <button type="submit" name="logout" class = "navbar-btn"><a href="/logout">Logout</a></button>
           </div>
         </div>
       </nav>
@@ -48,6 +48,11 @@
         {% endfor %}
     </div><br>
 </center>
+<div class="container">
+    <h1>Welcome, {{ request.user.first_name }}</h1>
+    <hr><br>
+    <h5 style="font-family: Monospace">HTTPS clone link for your repository: https://github.com/RSAHDA/{{ user_details.repo }}.git</h5>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"

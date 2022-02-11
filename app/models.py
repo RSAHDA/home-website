@@ -7,3 +7,9 @@ class blocked_ip(models.Model):
 
 class Announcement(models.Model):
     anouncement = models.TextField()
+
+
+class UserJob(models.Model):
+    username = models.CharField(max_length=999999)
+    repo = models.CharField(max_length=999999, blank=True)
+    job_title = models.CharField(max_length=999999)
