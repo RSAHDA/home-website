@@ -18,7 +18,7 @@ def index(request):
         if credentials is not None:
             login(request, credentials)
             return render(request, "home.html")
-            attempts = 0
+
             return redirect('/home')
 
         elif managment.validateIP(managment.getIP()):
