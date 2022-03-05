@@ -9,7 +9,7 @@
     <hr>
     <ul>
         {% for message in messages %}
-        <li><a>{{ message.subject }}: {{ message.from_whom }}</a> ------ <a>DELETE</a></li>
+        <li><a>{{ message.subject }}: {{ message.from_whom }}</a> ------ <a href="/inbox/delete/{{ message.message_id }}/1">DELETE</a></li>
         {% endfor %}
     </ul>
 </body>
