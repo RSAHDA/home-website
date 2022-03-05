@@ -20,8 +20,6 @@ def index(request):
             attempts = 0
             return redirect('/home')
 
-        elif managment.validateIP(managment.getIP()):
-            return render(request, "404.html")
         elif attempts > 3:
             ip = blocked_ip(sus_ips=managment.getIP())
             ip.save()
@@ -47,14 +45,9 @@ def sign_out(request):
 def home(request):
     if request.user.is_authenticated:
 
-        user_details = UserJob.objects.get(
-            username=request.user.username
-        )
-
         an = Announcement.objects.all()
         return render(request, "home.html", {
             'a': an,
-            "user_details": user_details,
         })
     else:
         return render(request, "404.html")
