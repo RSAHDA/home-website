@@ -32,13 +32,8 @@ def index(request):
             attempts = 0
             return redirect('/home')
 
-<<<<<<< HEAD
-        elif attempts > 3:
-            ip = blocked_ip(sus_ips=managment.getIP())
-=======
         elif attempts > 1:
             ip = blocked_ip(sus_ips=get_ip(request))
->>>>>>> 4d1d7be0d4f932bc2252a5327f49dcd395e2e8ae
             ip.save()
             return render(request, "404.html")
 
