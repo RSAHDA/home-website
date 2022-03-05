@@ -25,8 +25,20 @@ def create_message(request):
 
             message_id = random.randint(0, 1 * (10 ** 15))
 
-            new = SentMail(send_to=send_to, from_whom=from_whom, message=text, html=html, subject=subject, is_in_trash=False, message_id=message_id)
-            new.save()
+            if send_to == "" or subject == "":
+                return render(request, "create-message.html", {
+                    "error": "Try Again",
+                })
+            else:
+                new = SentMail(
+                    send_to=send_to,
+                    from_whom=from_whom,
+                    message=text, html=html,
+                    subject=subject,
+                    is_in_trash=False,
+                    message_id=message_id
+                )
+                new.save()
 
             return render(request, "message-sent.html")
         else:
@@ -55,5 +67,21 @@ def trash(request):
         return render(request, "trash.html", {
             "messages": messages
         })
+    else:
+        return render(request, "404.html")
+
+
+def delete_message(request, id, permanent_delete):
+    if request.user.is_authenticated:
+        if permanent_delete != 1:
+            message_to_delete = SentMail.objects.get(
+                message_id=id,
+            )
+            message_to_delete.is_in_trash = True
+            message_to_delete.save()
+            return redirect("/inbox")
+        else:
+            SentMail.objects.filter(message_id=id).delete()
+            return redirect("/inbox/trash")
     else:
         return render(request, "404.html")

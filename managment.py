@@ -1,12 +1,5 @@
-import socket
 from app.models import *
 from messenger.models import *
-
-hostname = socket.gethostname()
-
-
-def getIP():
-    return socket.gethostbyname(hostname)
 
 
 def validateIP(ipx):
@@ -25,6 +18,7 @@ def send_mail(send_to, request, html_message, message, subject):
 def load_mails(request):
     username = request.user.username
     mails = SentMail.objects.filter(
-        send_to=username
+        send_to=username,
+        is_in_trash=False,
     )
     return mails
