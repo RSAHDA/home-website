@@ -15,6 +15,21 @@ class UserJobAdmin(admin.ModelAdmin):
     list_filter = ["job_title", "repo"]
 
 
+class CustomerAdmin(admin.ModelAdmin):
+    list_display = [
+        "name",
+        "group_of",
+        "project",
+        "mean_age",
+        "leader_name",
+        "leader_age",
+        "expected_profit_per_week",
+        "needs",
+    ]
+    list_filter = ["name", 'project']
+
+
 admin.site.register(blocked_ip, blocked_ipAdmin)
 admin.site.register(Announcement, AnnouncementAdmin)
 admin.site.register(UserJob, UserJobAdmin)
+admin.site.register(Customer, CustomerAdmin)

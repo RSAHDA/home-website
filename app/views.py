@@ -58,9 +58,11 @@ def sign_out(request):
 def home(request):
     if request.user.is_authenticated:
         an = Announcement.objects.all()
+        customers = Customer.objects.all()
         return render(request, "home.html", {
             'a': an,
-            "user_details": UserJob.objects.get(username=request.user.username)
+            "user_details": UserJob.objects.get(username=request.user.username),
+            "customers": customers,
         })
     else:
         return render(request, "404.html")

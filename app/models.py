@@ -6,7 +6,7 @@ class blocked_ip(models.Model):
 
 
 class Announcement(models.Model):
-    anouncement = models.TextField()
+    anouncement = models.TextField(blank=True)
 
 
 class UserJob(models.Model):
@@ -25,3 +25,10 @@ class Customer(models.Model):
     leader_age = models.IntegerField()
     expected_profit_per_week = models.IntegerField()
     needs = models.TextField(max_length=999999)
+
+
+class UserTodo(models.Model):
+    username = models.CharField(max_length=999999)
+    todo_title = models.CharField(max_length=999999)
+    due_at = models.DateField()
+    remind_before_days = models.IntegerField()
