@@ -29,7 +29,12 @@ class CustomerAdmin(admin.ModelAdmin):
     list_filter = ["name", 'project']
 
 
+class EarningAdmin(admin.ModelAdmin):
+    list_display = ["revenue", "expense"]
+
+
 admin.site.register(blocked_ip, blocked_ipAdmin)
 admin.site.register(Announcement, AnnouncementAdmin)
 admin.site.register(UserJob, UserJobAdmin)
 admin.site.register(Customer, CustomerAdmin)
+admin.site.register(Earning, EarningAdmin)

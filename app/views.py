@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, logout, login
+from django.http import JsonResponse
 from .models import *
 import managment
 
@@ -59,10 +60,28 @@ def home(request):
     if request.user.is_authenticated:
         an = Announcement.objects.all()
         customers = Customer.objects.all()
-        return render(request, "home.html", {
-            'a': an,
-            "user_details": UserJob.objects.get(username=request.user.username),
-            "customers": customers,
-        })
+        if request.user.is_superuser:
+            return render(request, "home_auth.html", {
+                'a': an,
+                "user_details": UserJob.objects.get(username=request.user.username),
+                "customers": customers,
+            })
+        else:
+            return render(request, "home.html", {
+                'a': an,
+                "user_details": UserJob.objects.get(username=request.user.username),
+                "customers": customers,
+            })
+    else:
+        return render(request, "404.html")
+
+
+def profitAPI(request):
+    if request.user.is_authenticated & request.user.is_superuser:
+        dictionary = {}
+        for i in Earning.objects.all():
+            dictionary[f"{i.month}|{i.day}|{i.year}"] = f"{int(i.revenue) - int(i.expense)}"
+
+        return JsonResponse(dictionary)
     else:
         return render(request, "404.html")

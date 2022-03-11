@@ -32,3 +32,11 @@ class UserTodo(models.Model):
     todo_title = models.CharField(max_length=999999)
     due_at = models.DateField()
     remind_before_days = models.IntegerField()
+
+
+class Earning(models.Model):
+    year = models.IntegerField(unique=True)
+    month = models.IntegerField(unique=True)
+    day = models.IntegerField(unique=True)
+    revenue = models.IntegerField()
+    expense = models.IntegerField()
