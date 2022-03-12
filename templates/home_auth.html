@@ -41,9 +41,9 @@
 <center>
     <!-- MAKE THIS BETTER IF YOU CAN -->
     <h1> Announcements: </h1>
-    <div style="color: white; background-color: red;">
+    <div style="color: white; background-color: #eed202;">
         {% for i in a%}
-        {% if i == "" %}
+        {% if not i == "" %}
         <h5> {{ i.anouncement }} </h5>
         {% else %}
         <h5> Wahoo! No announcements! </h5>
@@ -78,7 +78,7 @@
       <tbody>
       {% for i in customers %}
         <tr>
-          <th scope="row">*</th>
+          <th scope="row"></th>
           <td><a href="/admin/app/customer/{{ i.pk }}">{{ i.name }}</a></td>
           <td>{{ i.project }}</td>
           <td>{{ i.expected_profit_per_week }} per week</td>
@@ -119,7 +119,7 @@
       <tbody>
       {% for i in todo %}
         <tr>
-          <th scope="row">*</th>
+          <th scope="row"></th>
           <td>{{ i.todo_title }} <a href="/delete_todo/{{ i.pk }}">DELETE</a></td>
           <td>{{ i.due_at }}</td>
         </tr>
