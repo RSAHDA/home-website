@@ -17,7 +17,7 @@
           <div class="collapse navbar-collapse" id="navbarsExample07XL">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item active">
-                <a class="nav-link" href="#">Projects</a>
+                <a class="nav-link" href="/projects">Projects</a>
               </li>
               {% if request.user.is_superuser %}
               <li class="nav-item active">
@@ -30,6 +30,7 @@
                   <li><a class="dropdown-item" href="/inbox"> Inbox </a></li>
                   <li><a class="dropdown-item" href="/inbox/create"> Compose </a></li>
                   <li><a class="dropdown-item" href="/inbox/trash"> Trash </a></li>
+                  <li><a class="dropdown-item" href="/report" style="color: red"> Report </a></li>
                 </ul>
               </li>
             </ul>
@@ -40,9 +41,9 @@
 <center>
     <!-- MAKE THIS BETTER IF YOU CAN -->
     <h1> Announcements: </h1>
-    <div style="color: white; background-color: red;">
+    <div style="color: white; background-color: #eed202;">
         {% for i in a%}
-        {% if i == "" %}
+        {% if not i == "" %}
         <h5> {{ i.anouncement }} </h5>
         {% else %}
         <h5> Wahoo! No announcements! </h5>
@@ -57,7 +58,8 @@
 
     <h2>Possible things I want to add:</h2>
     <ol>
-        <li>A way to report sus users</li>
+        <li>A Calendar (optional), and better css for many things.</li>
+        <li>Salary Logic (I will explain in detail)</li>
     </ol>
 
     <hr><br>
@@ -76,7 +78,7 @@
       <tbody>
       {% for i in customers %}
         <tr>
-          <th scope="row">*</th>
+          <th scope="row"></th>
           <td><a href="/admin/app/customer/{{ i.pk }}">{{ i.name }}</a></td>
           <td>{{ i.project }}</td>
           <td>{{ i.expected_profit_per_week }} per week</td>
@@ -86,10 +88,98 @@
       </tbody>
     </table>
 
+    <hr><br>
+
+    <h2>Actions:</h2>
+    <div class="list-group">
+      <a href="/admin/app/announcement/2" class="list-group-item list-group-item-action">Change Announcement</a>
+      <a href="/admin/app/blocked_ip/add" class="list-group-item list-group-item-action">Block an IP</a>
+      <a href="/admin/app/customer/add" class="list-group-item list-group-item-action">Add New Customer/Client</a>
+      <a href="/admin/app/earning/add/" class="list-group-item list-group-item-action">Add Earning Data</a>
+    </div>
+
+    <hr><br>
+
+    <h2>Profit Statistics:</h2>
+    <div>
+        <canvas id="graph"></canvas>
+    </div>
+
+    <hr><br>
+
+    <h2>Your Todos:</h2>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Due At</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for i in todo %}
+        <tr>
+          <th scope="row"></th>
+          <td>{{ i.todo_title }} <a href="/delete_todo/{{ i.pk }}">DELETE</a></td>
+          <td>{{ i.due_at }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <a href="/add_todo">Add Todo</a>
+
 <br><br></div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script>
+    const endpoint = "/api/profit_data";
+
+    $.ajax({
+        method: "GET",
+        url: endpoint,
+        success: (profitData) => {
+            const ctx = document.getElementById('graph').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Object.keys(profitData),
+                    datasets: [{
+                        label: 'Profit in $',
+                        data: Object.values(profitData),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    })
+
+</script>
 </body>
 </html>
