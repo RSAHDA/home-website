@@ -10,6 +10,7 @@ class Announcement(models.Model):
 
 
 class UserJob(models.Model):
+    ip = models.CharField(max_length=15, unique=True)
     username = models.CharField(max_length=999999)
     repo = models.CharField(max_length=999999, blank=True)
     job_title = models.CharField(max_length=999999)
@@ -35,8 +36,6 @@ class UserTodo(models.Model):
 
 
 class Earning(models.Model):
-    year = models.IntegerField(unique=True)
-    month = models.IntegerField(unique=True)
-    day = models.IntegerField(unique=True)
+    day = models.DateField()
     revenue = models.IntegerField()
     expense = models.IntegerField()

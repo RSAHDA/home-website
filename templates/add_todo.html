@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a todo</title>
+</head>
+<body>
+    <h1>Add a todo</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label>
+            <input type="text" placeholder="Add A Todo Title..." name="todo_title">
+        </label><br>
+        <label>
+            <input type="date" placeholder="Add A Date To Be Due..." name="due_date">
+        </label><br>
+        <label>
+            <input type="number" name="remind_before" placeholder="How many days should we remind you before of the due date?">
+        </label><br>
+
+        <input type="submit">
+    </form>
+</body>
+</html>

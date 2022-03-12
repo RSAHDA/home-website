@@ -33,8 +33,13 @@ class EarningAdmin(admin.ModelAdmin):
     list_display = ["revenue", "expense"]
 
 
+class UserTodoAdmin(admin.ModelAdmin):
+    list_display = ["username", "todo_title"]
+
+
 admin.site.register(blocked_ip, blocked_ipAdmin)
 admin.site.register(Announcement, AnnouncementAdmin)
 admin.site.register(UserJob, UserJobAdmin)
 admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Earning, EarningAdmin)
+admin.site.register(UserTodo, UserTodoAdmin)

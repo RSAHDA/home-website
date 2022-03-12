@@ -1,5 +1,6 @@
 from app.models import *
 from messenger.models import *
+import random
 
 
 def validateIP(ipx):
@@ -11,7 +12,16 @@ def validateIP(ipx):
 
 def send_mail(send_to, request, html_message, message, subject):
     send_from = request.user.username
-    new_message = SentMail(send_to=send_to, from_whom=send_from, message=message, html=html_message, subject=subject)
+    message_id = random.randint(0, 1 * (10 ** 15))
+    new_message = SentMail(
+        send_to=send_to,
+        from_whom=send_from,
+        message=message,
+        html=html_message,
+        subject=subject,
+        is_in_trash=False,
+        message_id=message_id,
+    )
     new_message.save()
 
 

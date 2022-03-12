@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report a USER</title>
+</head>
+<body>
+<h1>Report A User:</h1>
+<form method="POST">
+    {% csrf_token %}
+    <label>
+        <input name="username" type="text" placeholder="Username to report...">
+    </label><br>
+    <label>
+        <textarea name="reason" placeholder="Provide a reason on why you think he should be reported."></textarea>
+    </label><br>
+
+    <input type="submit">
+</form>
+</body>
+</html>

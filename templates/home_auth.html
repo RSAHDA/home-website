@@ -17,7 +17,7 @@
           <div class="collapse navbar-collapse" id="navbarsExample07XL">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item active">
-                <a class="nav-link" href="#">Projects</a>
+                <a class="nav-link" href="/projects">Projects</a>
               </li>
               {% if request.user.is_superuser %}
               <li class="nav-item active">
@@ -30,6 +30,7 @@
                   <li><a class="dropdown-item" href="/inbox"> Inbox </a></li>
                   <li><a class="dropdown-item" href="/inbox/create"> Compose </a></li>
                   <li><a class="dropdown-item" href="/inbox/trash"> Trash </a></li>
+                  <li><a class="dropdown-item" href="/report" style="color: red"> Report </a></li>
                 </ul>
               </li>
             </ul>
@@ -57,8 +58,7 @@
 
     <h2>Possible things I want to add:</h2>
     <ol>
-        <li>A little todo like system</li>
-        <li>A way to report sus users</li>
+        <li>A Calendar (optional), and better css for many things.</li>
     </ol>
 
     <hr><br>
@@ -103,6 +103,29 @@
         <canvas id="graph"></canvas>
     </div>
 
+    <hr><br>
+
+    <h2>Your Todos:</h2>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Due At</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for i in todo %}
+        <tr>
+          <th scope="row">*</th>
+          <td>{{ i.todo_title }} <a href="/delete_todo/{{ i.pk }}">DELETE</a></td>
+          <td>{{ i.due_at }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <a href="/add_todo">Add Todo</a>
+
 <br><br></div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
         crossorigin="anonymous"></script>
@@ -110,7 +133,7 @@
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-    <script>
+<script>
     const endpoint = "/api/profit_data";
 
     $.ajax({
