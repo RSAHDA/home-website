@@ -10,10 +10,11 @@ class Announcement(models.Model):
 
 
 class UserJob(models.Model):
-    ip = models.CharField(max_length=15, unique=True)
+    ip = models.CharField(max_length=15)
     username = models.CharField(max_length=999999)
     repo = models.CharField(max_length=999999, blank=True)
-    job_title = models.CharField(max_length=999999)
+    job_title = models.CharField(max_length=999999, unique=True)
+    salary = models.IntegerField()
 
 
 class Customer(models.Model):

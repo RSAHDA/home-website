@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from .models import *
 import managment
+import datetime
 
 attempts = 0
 
@@ -61,28 +62,52 @@ def home(request):
     if request.user.is_authenticated:
         an = Announcement.objects.all()
         customers = Customer.objects.all()
+        due_todos = []
+
+        # see if today is reminded day or due day for any UserTodo:
+        for i in UserTodo.objects.filter(username=request.user.username):
+            current_date = i.due_at
+            if current_date.day == datetime.datetime.today().day and current_date.month == datetime.datetime.today().month and \
+                    current_date.year == datetime.datetime.today().year:
+                # today is due:
+                due_todos.append(i)
+            else:
+                # check if today is reminded day:
+                remind_date = i.due_at - datetime.timedelta(days=i.remind_before_days)
+                if remind_date.day == datetime.datetime.today().day and remind_date.month == datetime.datetime.today().month and \
+                        remind_date.year == datetime.datetime.today().year:
+                    # today is reminded:
+                    due_todos.append(i)
+
         if request.user.is_superuser:
             return render(request, "home_auth.html", {
                 'a': an,
                 "user_details": UserJob.objects.get(username=request.user.username),
                 "customers": customers,
-                "todo": UserTodo.objects.filter(username=request.user.username)
+                "todo": UserTodo.objects.filter(username=request.user.username),
+                "due_todos": due_todos,
             })
         else:
             return render(request, "home.html", {
                 'a': an,
                 "user_details": UserJob.objects.get(username=request.user.username),
                 "customers": customers,
+                "todo": UserTodo.objects.filter(username=request.user.username),
+                "due_todos": due_todos,
             })
     else:
         return render(request, "404.html")
 
 
-def profitAPI(request):
-    if request.user.is_authenticated & request.user.is_superuser:
+def profitAPI(request, salary):
+    if request.user.is_authenticated:
         dictionary = {}
-        for i in Earning.objects.all():
-            dictionary[f"{i.day}"] = f"{int(i.revenue) - int(i.expense)}"
+        if salary == 0:
+            for i in Earning.objects.all():
+                dictionary[f"{i.day}"] = f"{int(i.revenue) - int(i.expense)}"
+        elif salary == 1:
+            for i in UserJob.objects.all():
+                dictionary[f"{i.job_title}"] = f"{i.salary}"
 
         return JsonResponse(dictionary)
     else:
