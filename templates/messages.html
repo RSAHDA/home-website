@@ -40,17 +40,6 @@
       </nav>
     <div class="container"><br>
         <h1>Inbox Of {{ request.user.first_name }} {{ request.user.last_name }}:</h1>
-
-<!--        <ul>-->
-<!--            {% for message in messages %}-->
-<!--            <li>-->
-<!--                <a href="/inbox/{{ message.message_id }}" target="_blank">{{ message.subject }}:   {{ message.from_whom }}</a>,<br>-->
-<!--                <a href="/inbox/delete/{{ message.message_id }}/0">Delete this Message</a>-->
-<!--            </li>-->
-<!--            {% empty %}-->
-<!--            <h5> Wohoo! Your inbox is empty!</h5>-->
-<!--            {% endfor %}-->
-<!--        </ul>-->
         <table class="table table-bordered">
           <thead>
             <tr>
