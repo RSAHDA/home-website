@@ -142,6 +142,11 @@ def report(request):
             reported_user = request.POST["username"]
             reason = request.POST["reason"]
 
+            if reported_user == "" or reason == "":
+                return render(request, "report.html", {
+                    "error": "All fields are required",
+                })
+
             html_message = f"""
 <h1 style="color: red">Potential Threat</h1>
 <p>SUSPECT: {reported_user} <br>
