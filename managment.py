@@ -1,13 +1,5 @@
-from app.models import *
 from messenger.models import *
 import random
-
-
-def validateIP(ipx):
-    for i in blocked_ip.objects.all():
-        if i.sus_ips == ipx:
-            return False
-    return True
 
 
 def send_mail(send_to, request, html_message, message, subject):
