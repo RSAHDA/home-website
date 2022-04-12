@@ -23,7 +23,7 @@ def create_message(request):
 
             from_whom = request.user.username
 
-            message_id = random.randint(0, 1 * (10 ** 15))
+            message_id = random.randint(0, 1 * (10 ** 7))
 
             if send_to == "" or subject == "":
                 return render(request, "create-message.html", {
