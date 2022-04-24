@@ -64,7 +64,7 @@ def home(request):
                     # today is reminded:
                     due_todos.append(i)
 
-        if request.user.is_superuser or request.user.username == "aniyugamali":
+        if request.user.is_superuser:
             return render(request, "home_auth.html", {
                 'a': an,
                 "user_details": UserJob.objects.get(username=request.user.username),
