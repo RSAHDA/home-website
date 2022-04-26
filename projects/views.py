@@ -1,9 +1,8 @@
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
 from github import *
 from .models import *
 
-@csrf_exempt
+
 def projects(request):
     g = Github("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")
 

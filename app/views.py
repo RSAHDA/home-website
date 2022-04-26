@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, logout, login
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from .models import *
@@ -9,7 +8,7 @@ import datetime
 
 attempts = 0
 
-@csrf_exempt
+
 def index(request):
     global attempts
     if request.method == "POST":
@@ -37,12 +36,12 @@ def index(request):
         else:
             return render(request, "login.html")
 
-@csrf_exempt
+
 def sign_out(request):
     logout(request)
     return redirect('/')
 
-@csrf_exempt
+
 def home(request):
     if request.user.is_authenticated:
         an = Announcement.objects.all()
@@ -83,7 +82,7 @@ def home(request):
     else:
         return render(request, "404.html")
 
-@csrf_exempt
+
 def profitAPI(request, salary):
     if request.user.is_authenticated:
         dictionary = {}
@@ -98,7 +97,7 @@ def profitAPI(request, salary):
     else:
         return render(request, "404.html")
 
-@csrf_exempt
+
 def add_todo(request):
     if request.user.is_authenticated:
         if request.method == "POST":
@@ -115,12 +114,12 @@ def add_todo(request):
     else:
         return render(request, "404.html")
 
-@csrf_exempt
+
 def delete_todo(request, pk):
     UserTodo.objects.get(pk=pk).delete()
     return redirect("/")
 
-@csrf_exempt
+
 def report(request):
     if request.user.is_authenticated:
         if request.method == "POST":

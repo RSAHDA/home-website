@@ -130,12 +130,10 @@
 
     <br><hr>
 
-    {% if request.user.username == "rishikuttama" %}
     <h2>Salary Percentage-wise:</h2>
     <div>
         <canvas id="graph2"></canvas>
     </div>
-    {% endif %}
 
 
 <br><br></div>
@@ -191,7 +189,6 @@
         }
     })
 </script>
-{% if request.user.username == "rishikuttama" %}
 <script>
     const endpoint2 = "/api/profit_data/1";
 
@@ -238,6 +235,5 @@
         }
     })
 </script>
-{% endif %}
 </body>
 </html>

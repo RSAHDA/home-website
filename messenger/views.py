@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
 import managment
 from .models import *
 import random
 
-@csrf_exempt
+
 def messages(request):
     if request.user.is_authenticated:
         return render(request, "messages.html", {
@@ -13,7 +13,7 @@ def messages(request):
     else:
         return render(request, "404.html")
 
-@csrf_exempt
+
 def create_message(request):
     if request.user.is_authenticated:
         if request.method == "POST":
@@ -43,11 +43,15 @@ def create_message(request):
 
             return render(request, "message-sent.html")
         else:
-            return render(request, "create-message.html")
+            users = User.objects.all()
+
+            return render(request, "create-message.html", {
+                'users': users
+            })
     else:
         return render(request, "404.html")
 
-@csrf_exempt
+
 def view_message(request, id):
     if request.user.is_authenticated:
         message = SentMail.objects.get(
@@ -59,7 +63,7 @@ def view_message(request, id):
     else:
         return render(request, "404.html")
 
-@csrf_exempt
+
 def trash(request):
     if request.user.is_authenticated:
         messages = SentMail.objects.filter(
@@ -71,7 +75,7 @@ def trash(request):
     else:
         return render(request, "404.html")
 
-@csrf_exempt
+
 def delete_message(request, id, permanent_delete):
     if request.user.is_authenticated:
         if permanent_delete != 1:

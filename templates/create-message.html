@@ -51,7 +51,12 @@
         <form method="post" id="form">
             {% csrf_token %}
             <label>Send To:  </label>
-            <input type="text" placeholder="Send To" name="send_to"><br>
+            <input type="text" placeholder="Send To" name="send_to" list="users" autocomplete="false"><br>
+            <datalist id="users">
+                {% for i in users %}
+                <option value="{{ i.username }}">
+                {% endfor %}
+            </datalist>
 
             <label>Subject:  </label>
             <input type="text" placeholder="Subject" name="subject"><br>
