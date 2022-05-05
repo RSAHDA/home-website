@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'messenger',
     'projects',
     "whitenoise.runserver_nostatic",
-    'thirdpartyauth',
+    'thirdPartyAuth',
 ]
 
 MIDDLEWARE = [
