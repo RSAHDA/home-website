@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('app.urls')),
     path('inbox/', include('messenger.urls')),
     path('projects/', include('projects.urls')),
+    path('auth/', include('thirdpartyauth.urls')),
 ]
