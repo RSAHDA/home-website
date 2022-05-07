@@ -7,7 +7,7 @@ class AnnouncementAdmin(admin.ModelAdmin):
 
 
 class UserJobAdmin(admin.ModelAdmin):
-    list_display = ["username", "job_title", "repo"]
+    list_display = ["username", "job_title", "repo", 'salary']
     list_filter = ["job_title", "repo"]
 
 
