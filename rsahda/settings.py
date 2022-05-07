@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'messenger',
     'projects',
     "whitenoise.runserver_nostatic",
-    'thirdParty',
 ]
 
 MIDDLEWARE = [
