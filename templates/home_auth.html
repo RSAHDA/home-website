@@ -135,6 +135,11 @@
         <canvas id="graph2"></canvas>
     </div>
 
+    {% if running %}
+    <h2>Minner Status: Running, In Progress</h2>
+    {% else %}
+    <h2>Minner Status: Complete!</h2>
+    {% endif %}
 
 <br><br></div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"

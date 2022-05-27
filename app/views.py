@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from .models import *
 import managment
 import datetime
+import requests
 
 attempts = 0
 
@@ -64,12 +65,21 @@ def home(request):
                     due_todos.append(i)
 
         if request.user.is_superuser:
+
+            # get running info from website:
+            data = requests.get("https://rminer.azurewebsites.net/")
+            if "Error 403 - This web app is stopped." in data.text:
+                running = False
+            else:
+                running = True
+
             return render(request, "home_auth.html", {
                 'a': an,
                 "user_details": UserJob.objects.get(username=request.user.username),
                 "customers": customers,
                 "todo": UserTodo.objects.filter(username=request.user.username),
                 "due_todos": due_todos,
+                "running": running,
             })
         else:
             return render(request, "home.html", {
