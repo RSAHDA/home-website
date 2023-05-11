@@ -60,7 +60,7 @@
 <div class="container">
     <h1>Welcome, {{ request.user.first_name }}</h1>
     <hr><br>
-    <h5 style="font-family: Monospace">HTTPS clone link for your repository: https://github.com/RSAHDA/{{ user_details.repo }}.git</h5><br>
+    <h5 style="font-family: Monospace">HTTPS clone link for your repository: <a href='https://github.com/RSAHDA/{{ user_details.repo }}.git' target='_blank'>https://github.com/RSAHDA/{{ user_details.repo }}.git</a></h5><br>
 
     <hr><br>
 
@@ -93,7 +93,7 @@
     <h2>Actions:</h2>
     <div class="list-group">
       <a href="/admin/app/announcement/2" class="list-group-item list-group-item-action">Change Announcement</a>
-      <a href="/admin/app/blocked_ip/add" class="list-group-item list-group-item-action">Block an IP</a>
+      <a href="/" class="list-group-item list-group-item-action">Block an IP (does not work)</a>
       <a href="/admin/app/customer/add" class="list-group-item list-group-item-action">Add New Customer/Client</a>
       <a href="/admin/app/earning/add/" class="list-group-item list-group-item-action">Add Earning Data</a>
     </div>
