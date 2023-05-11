@@ -67,11 +67,14 @@ def home(request):
         if request.user.is_superuser:
 
             # get running info from website:
-            data = requests.get("https://rminer.azurewebsites.net/")
-            if "Error 403 - This web app is stopped." in data.text:
+            try:
+                data = requests.get("https://rminer.azurewebsites.net/")
+                if "Error 403 - This web app is stopped." in data.text:
+                    running = False
+                else:
+                    running = True
+            except:
                 running = False
-            else:
-                running = True
 
             return render(request, "home_auth.html", {
                 'a': an,
@@ -145,9 +148,9 @@ def report(request):
 <h1 style="color: red">Potential Threat</h1>
 <p>SUSPECT: {reported_user} <br>
 Reported by: {request.user.username} <br>
-REASON: <br> 
+REASON: <br>
 {reason}</p>
-  
+
             """
 
             for i in User.objects.filter(is_superuser=True):
