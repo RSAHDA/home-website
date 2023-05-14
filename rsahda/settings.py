@@ -142,4 +142,4 @@ CSRF_COOKIE_SECURE = True
 SECURE_SSL_REDIRECT = False
 
 CORS_ALLOW_ALL_ORIGINS = True
-CSRF_TRUSTED_ORIGINS = ['http://rsahdaweb.azurewebsites.net']
+CSRF_TRUSTED_ORIGINS = ['http://rsahdaweb.azurewebsites.net', 'https://rsahdaweb.azurewebsites.net']
