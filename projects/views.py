@@ -4,7 +4,7 @@ from .models import *
 
 
 def projects(request):
-    g = Github("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")
+    g = Github("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")
 
     for i in g.get_organization("RSAHDA").get_repos():
         project = Project(name=i.name, url=f"https://github.com/RSAHDA/{i.name}", description=i.description)
