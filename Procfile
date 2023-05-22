@@ -1,1 +1,0 @@
-web: gunicorn rsahda.wsgi --log-file -
