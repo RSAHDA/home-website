@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ntj=q@8rt9z7m7gg1wwu8bi8$si6nlkb8wgg(mhu#u!1qhpvl^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'rsahdaweb.azurewebsites.net']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'rsahdaweb.azurewebsites.net', 'holymother.pythonanywhere.com']
 
 
 # Application definition
@@ -142,4 +142,4 @@ CSRF_COOKIE_SECURE = True
 SECURE_SSL_REDIRECT = False
 
 CORS_ALLOW_ALL_ORIGINS = True
-CSRF_TRUSTED_ORIGINS = ['http://rsahdaweb.azurewebsites.net', 'https://rsahdaweb.azurewebsites.net']
+CSRF_TRUSTED_ORIGINS = ['http://rsahdaweb.azurewebsites.net', 'https://rsahdaweb.azurewebsites.net', 'https://holymother.pythonanywhere.com', 'http://holymother.pythonanywhere.com']
