@@ -15,18 +15,20 @@ def get_token():
 
 
 def projects(request):
-    ## TODO:
-    # g = Github(get_token())
+    # TODO:
+    try:
+        g = Github(get_token())
 
-    # for i in g.get_organization("RSAHDA").get_repos():
-    #     project = Project(name=i.name, url=f"https://github.com/RSAHDA/{i.name}", description=i.description)
+        for i in g.get_organization("RSAHDA").get_repos():
+            project = Project(name=i.name, url=f"https://github.com/RSAHDA/{i.name}", description=i.description)
 
-    #     try:
-    #         Project.objects.get(name=i.name)
-    #     except:
-    #         project.save()
+            try:
+                Project.objects.get(name=i.name)
+            except:
+                project.save()
 
-    # return render(request, "projects.html", {
-    #     "repos": Project.objects.all()
-    # })
-    return render(request, "error.html")
+        return render(request, "projects.html", {
+            "repos": Project.objects.all()
+        })
+    except:
+        return render(request, "error.html")
