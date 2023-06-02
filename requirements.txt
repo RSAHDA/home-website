@@ -1,4 +1,4 @@
-asgiref==3.4.1
+asgiref>=3.5
 blinker==1.6.2
 certifi==2022.12.7
 cffi==1.15.0
